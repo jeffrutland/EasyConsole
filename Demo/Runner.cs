@@ -1,10 +1,14 @@
 ﻿namespace Demo
 {
-    class Runner
+    internal class Runner
     {
-        static void Main(string[] args)
+        #region  Private Methods
+
+        private static void Main(string[] args)
         {
             new DemoProgram().Run();
         }
+
+        #endregion
     }
 }

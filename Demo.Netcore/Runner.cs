@@ -1,10 +1,14 @@
-﻿namespace Demo
+﻿namespace Demo.Netcore
 {
-    class Runner
+    internal class Runner
     {
-        static void Main(string[] args)
+        #region  Private Methods
+
+        private static void Main()
         {
             new DemoProgram().Run();
         }
+
+        #endregion
     }
 }

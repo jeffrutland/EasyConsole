@@ -1,76 +1,99 @@
-﻿using System;
+﻿#region Usings
+
+using System;
+
+#endregion
 
 namespace EasyConsole
 {
-	public static class Input
-	{
-		public static int ReadInt(string prompt, int min, int max)
-		{
-			Output.DisplayPrompt(prompt);
-			return ReadInt(min, max);
-		}
+    public static class Input
+    {
+        #region  Public Methods
 
-		public static int ReadInt(int min, int max)
-		{
-			int value = ReadInt();
+        public static int ReadInt(string prompt,
+                                  int min,
+                                  int max)
+        {
+            Output.DisplayPrompt(prompt);
+            return ReadInt(min,
+                           max);
+        }
 
-			while (value < min || value > max)
-			{
-				Output.DisplayPrompt("Please enter an integer between {0} and {1} (inclusive)", min, max);
-				value = ReadInt();
-			}
+        public static int ReadInt(int min,
+                                  int max)
+        {
+            int value = ReadInt();
 
-			return value;
-		}
+            while (value < min || value > max)
+            {
+                Output.DisplayPrompt("Please enter an integer between {0} and {1} (inclusive)",
+                                     min,
+                                     max);
+                value = ReadInt();
+            }
 
-		public static int ReadInt()
-		{
-			string input = Console.ReadLine();
-			int value;
+            return value;
+        }
 
-			while (!int.TryParse(input, out value))
-			{
-				Output.DisplayPrompt("Please enter an integer");
-				input = Console.ReadLine();
-			}
+        public static int ReadInt()
+        {
+            string input = Console.ReadLine();
+            int value;
 
-			return value;
-		}
+            while (!int.TryParse(input,
+                                 out value))
+            {
+                Output.DisplayPrompt("Please enter an integer");
+                input = Console.ReadLine();
+            }
 
-		public static string ReadString(string prompt)
-		{
-			Output.DisplayPrompt(prompt);
-			return Console.ReadLine();
-		}
+            return value;
+        }
 
-		public static ConsoleKeyInfo ReadKey(string prompt)
-		{
-			Output.DisplayPrompt(prompt);
-			return Console.ReadKey();
-		}
+        public static string ReadString(string prompt)
+        {
+            Output.DisplayPrompt(prompt);
+            return Console.ReadLine();
+        }
 
-		public static Boolean ReadKeyYesOrNo(string prompt)
-		{
-			var key = ReadKey($"{prompt} (y/n)").KeyChar;
-			return key == 'y';
-		}
+        public static ConsoleKeyInfo ReadKey(string prompt)
+        {
+            Output.DisplayPrompt(prompt);
+            return Console.ReadKey();
+        }
 
-		public static TEnum ReadEnum<TEnum>(string prompt) where TEnum : struct, IConvertible, IComparable, IFormattable
-		{
-			Type type = typeof(TEnum);
+        public static bool ReadKeyYesOrNo(string prompt)
+        {
+            var key = ReadKey($"{prompt} (y/n)").KeyChar;
+            return key == 'y';
+        }
 
-			if (!type.IsEnum)
-				throw new ArgumentException("TEnum must be an enumerated type");
+        public static TEnum ReadEnum<TEnum>(string prompt)
+            where TEnum : struct, IConvertible, IComparable, IFormattable
+        {
+            Type type = typeof(TEnum);
 
-			Output.WriteLine(prompt);
-			Menu menu = new Menu();
+            if (!type.IsEnum)
+            {
+                throw new ArgumentException("TEnum must be an enumerated type");
+            }
 
-			TEnum choice = default(TEnum);
-			foreach (var value in Enum.GetValues(type))
-				menu.Add(Enum.GetName(type, value), () => { choice = (TEnum)value; });
-			menu.Display();
+            Output.WriteLine(prompt);
+            Menu menu = new Menu();
 
-			return choice;
-		}
-	}
+            TEnum choice = default(TEnum);
+            foreach (var value in Enum.GetValues(type))
+            {
+                menu.Add(Enum.GetName(type,
+                                      value),
+                         () => { choice = (TEnum) value; });
+            }
+
+            menu.Display();
+
+            return choice;
+        }
+
+        #endregion
+    }
 }

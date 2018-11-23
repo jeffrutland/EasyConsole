@@ -1,12 +1,19 @@
-﻿using Demo.Pages;
+﻿#region Usings
+
+using Demo.Netcore.Pages;
 using EasyConsole;
 
-namespace Demo
+#endregion
+
+namespace Demo.Netcore
 {
-    class DemoProgram : Program
+    internal class DemoProgram : Program
     {
+        #region  .ctor
+
         public DemoProgram()
-            : base("EasyConsole Demo", breadcrumbHeader: true)
+            : base("EasyConsole Demo",
+                   true)
         {
             AddPage(new MainPage(this));
             AddPage(new Page1(this));
@@ -18,5 +25,7 @@ namespace Demo
 
             SetPage<MainPage>();
         }
+
+        #endregion
     }
 }

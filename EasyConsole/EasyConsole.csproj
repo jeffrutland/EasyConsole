@@ -66,7 +66,7 @@
   <Target Name="AfterBuild">
     <!-- Only download a new copy of nuget.exe if we don't have a copy available -->
     <WebDownload Condition="!Exists('nuget.exe')" Filename="nuget.exe" FileUri="https://dist.nuget.org/win-x86-commandline/latest/nuget.exe" />
-    
-    <Exec Command="nuget pack EasyConsole.csproj"></Exec>
+    <Exec Command="nuget pack EasyConsole.csproj">
+    </Exec>
   </Target>
 </Project>
