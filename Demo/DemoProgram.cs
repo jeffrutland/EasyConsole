@@ -1,19 +1,11 @@
-﻿#region Usings
-
-using Demo.Pages;
+﻿using Demo.Pages;
 using EasyConsole;
-
-#endregion
 
 namespace Demo
 {
     internal class DemoProgram : Program
     {
-        #region  .ctor
-
-        public DemoProgram()
-            : base("EasyConsole Demo",
-                   true)
+        public DemoProgram() : base("EasyConsole Demo", true)
         {
             AddPage(new MainPage(this));
             AddPage(new Page1(this));
@@ -25,7 +17,5 @@ namespace Demo
 
             SetPage<MainPage>();
         }
-
-        #endregion
     }
 }

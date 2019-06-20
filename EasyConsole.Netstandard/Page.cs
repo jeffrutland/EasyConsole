@@ -1,34 +1,20 @@
-﻿#region Usings
-
-using System;
+﻿using System;
 using System.Linq;
-
-#endregion
 
 namespace EasyConsole
 {
     public abstract class Page
     {
-        #region  .ctor
-
         protected Page(string title,
-                    Program program)
+            Program program)
         {
             Title = title;
             Program = program;
         }
 
-        #endregion
-
-        #region  Properties
-
         public string Title { get; }
 
         public Program Program { get; set; }
-
-        #endregion
-
-        #region  Public Methods
 
         public virtual void Display()
         {
@@ -53,7 +39,5 @@ namespace EasyConsole
 
             Console.WriteLine("---");
         }
-
-        #endregion
     }
 }

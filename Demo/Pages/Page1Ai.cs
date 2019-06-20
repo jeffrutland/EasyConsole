@@ -1,24 +1,12 @@
-﻿#region Usings
-
-using EasyConsole;
-
-#endregion
+﻿using EasyConsole;
 
 namespace Demo.Pages
 {
     internal class Page1Ai : Page
     {
-        #region  .ctor
-
-        public Page1Ai(Program program)
-            : base("Page 1Ai",
-                   program)
+        public Page1Ai(Program program) : base("Page 1Ai", program)
         {
         }
-
-        #endregion
-
-        #region  Public Methods
 
         public override void Display()
         {
@@ -29,7 +17,5 @@ namespace Demo.Pages
             Input.ReadString("Press [Enter] to navigate home");
             Program.NavigateHome();
         }
-
-        #endregion
     }
 }

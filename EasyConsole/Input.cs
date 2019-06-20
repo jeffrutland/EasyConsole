@@ -1,34 +1,22 @@
-﻿#region Usings
-
-using System;
-
-#endregion
+﻿using System;
 
 namespace EasyConsole
 {
     public static class Input
     {
-        #region  Public Methods
-
-        public static int ReadInt(string prompt,
-                                  int min,
-                                  int max)
+        public static int ReadInt(string prompt, int min, int max)
         {
             Output.DisplayPrompt(prompt);
-            return ReadInt(min,
-                           max);
+            return ReadInt(min, max);
         }
 
-        public static int ReadInt(int min,
-                                  int max)
+        public static int ReadInt(int min, int max)
         {
             int value = ReadInt();
 
             while (value < min || value > max)
             {
-                Output.DisplayPrompt("Please enter an integer between {0} and {1} (inclusive)",
-                                     min,
-                                     max);
+                Output.DisplayPrompt("Please enter an integer between {0} and {1} (inclusive)", min, max);
                 value = ReadInt();
             }
 
@@ -40,8 +28,7 @@ namespace EasyConsole
             string input = Console.ReadLine();
             int value;
 
-            while (!int.TryParse(input,
-                                 out value))
+            while (!int.TryParse(input, out value))
             {
                 Output.DisplayPrompt("Please enter an integer");
                 input = Console.ReadLine();
@@ -56,8 +43,7 @@ namespace EasyConsole
             return Console.ReadLine();
         }
 
-        public static TEnum ReadEnum<TEnum>(string prompt)
-            where TEnum : struct, IConvertible, IComparable, IFormattable
+        public static TEnum ReadEnum<TEnum>(string prompt) where TEnum : struct, IConvertible, IComparable, IFormattable
         {
             Type type = typeof(TEnum);
 
@@ -72,16 +58,12 @@ namespace EasyConsole
             TEnum choice = default(TEnum);
             foreach (var value in Enum.GetValues(type))
             {
-                menu.Add(Enum.GetName(type,
-                                      value),
-                         () => { choice = (TEnum) value; });
+                menu.Add(Enum.GetName(type, value), () => { choice = (TEnum) value; });
             }
 
             menu.Display();
 
             return choice;
         }
-
-        #endregion
     }
 }
