@@ -1,24 +1,12 @@
-﻿#region Usings
-
-using EasyConsole;
-
-#endregion
+﻿using EasyConsole;
 
 namespace Demo.Netcore.Pages
 {
     internal class Page2 : Page
     {
-        #region  .ctor
-
-        public Page2(Program program)
-            : base("Page 2",
-                   program)
+        public Page2(Program program) : base("Page 2", program)
         {
         }
-
-        #endregion
-
-        #region  Public Methods
 
         public override void Display()
         {
@@ -29,7 +17,5 @@ namespace Demo.Netcore.Pages
             Input.ReadString("Press [Enter] to navigate home");
             Program.NavigateHome();
         }
-
-        #endregion
     }
 }

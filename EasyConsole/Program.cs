@@ -1,20 +1,13 @@
-﻿#region Usings
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-
-#endregion
 
 namespace EasyConsole
 {
     public abstract class Program
     {
-        #region  .ctor
-
-        protected Program(string title,
-                          bool breadcrumbHeader)
+        protected Program(string title, bool breadcrumbHeader)
         {
             Title = title;
             Pages = new Dictionary<Type, Page>();
@@ -22,35 +15,17 @@ namespace EasyConsole
             BreadcrumbHeader = breadcrumbHeader;
         }
 
-        #endregion
-
-        #region  Properties
-
         public bool BreadcrumbHeader { get; }
 
         public Stack<Page> History { get; }
 
         public bool NavigationEnabled => History.Count > 1;
 
-        #endregion
-
-        #region Internal Properties
-
         protected string Title { get; set; }
 
-        protected Page CurrentPage => History.Any()
-                                          ? History.Peek()
-                                          : null;
-
-        #endregion
-
-        #region  Private Properties
+        protected Page CurrentPage => History.Any() ? History.Peek() : null;
 
         private Dictionary<Type, Page> Pages { get; }
-
-        #endregion
-
-        #region  Public Methods
 
         public virtual void Run()
         {
@@ -62,8 +37,7 @@ namespace EasyConsole
             }
             catch (Exception e)
             {
-                Output.WriteLine(ConsoleColor.Red,
-                                 e.ToString());
+                Output.WriteLine(ConsoleColor.Red, e.ToString());
             }
             finally
             {
@@ -84,8 +58,7 @@ namespace EasyConsole
             }
             else
             {
-                Pages.Add(pageType,
-                          page);
+                Pages.Add(pageType, page);
             }
         }
 
@@ -100,8 +73,7 @@ namespace EasyConsole
             CurrentPage.Display();
         }
 
-        public T SetPage<T>()
-            where T : Page
+        public T SetPage<T>() where T : Page
         {
             Type pageType = typeof(T);
 
@@ -113,8 +85,7 @@ namespace EasyConsole
             // leave the current page
 
             // select the new page
-            if (!Pages.TryGetValue(pageType,
-                                   out Page nextPage))
+            if (!Pages.TryGetValue(pageType, out Page nextPage))
             {
                 throw new KeyNotFoundException("The given page \"{0}\" was not present in the program".Format(pageType));
             }
@@ -125,8 +96,7 @@ namespace EasyConsole
             return CurrentPage as T;
         }
 
-        public T NavigateTo<T>()
-            where T : Page
+        public T NavigateTo<T>() where T : Page
         {
             SetPage<T>();
 
@@ -143,7 +113,5 @@ namespace EasyConsole
             CurrentPage.Display();
             return CurrentPage;
         }
-
-        #endregion
     }
 }
